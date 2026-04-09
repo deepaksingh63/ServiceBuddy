@@ -1,0 +1,25 @@
+{
+  "name": "service-marketplace-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "seed": "node src/seed/seedData.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
+    "nodemailer": "^6.10.1",
+    "razorpay": "^2.9.5",
+    "socket.io": "^4.8.1"
+  }
+}

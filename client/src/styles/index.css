@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #11212d;
+  background: #f7efe5;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(217, 125, 84, 0.14), transparent 25%),
+    radial-gradient(circle at right center, rgba(36, 72, 85, 0.08), transparent 22%),
+    linear-gradient(180deg, #fbf5ee 0%, #f7efe5 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.input {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(17, 33, 45, 0.12);
+  background: #fff;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  color: #11212d;
+  outline: none;
+}
+
+.input:focus {
+  border-color: rgba(217, 125, 84, 0.75);
+  box-shadow: 0 0 0 4px rgba(217, 125, 84, 0.12);
+}
+
+.btn-primary {
+  border: 0;
+  border-radius: 999px;
+  background: #11212d;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.95rem 1.2rem;
+  transition: 180ms ease;
+}
+
+.btn-primary:hover {
+  background: #244855;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(17, 33, 45, 0.12);
+  border-radius: 999px;
+  background: white;
+  color: #11212d;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.95rem 1.2rem;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(217, 125, 84, 0.45);
+  color: #d97d54;
+}
+
+.hero-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top right, rgba(217, 125, 84, 0.22), transparent 30%),
+    linear-gradient(135deg, #11212d 0%, #1f3544 56%, #244855 100%);
+  color: #fff;
+  box-shadow: 0 28px 70px rgba(17, 33, 45, 0.18);
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -35% auto;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  filter: blur(10px);
+}
+
+.surface-panel {
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 33, 45, 0.06);
+  box-shadow: 0 18px 45px rgba(17, 33, 45, 0.08);
+}
+
+.surface-muted {
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.56)),
+    #f7efe5;
+  border: 1px solid rgba(17, 33, 45, 0.06);
+}
+
+.metric-card {
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.88)),
+    #fff;
+  border: 1px solid rgba(17, 33, 45, 0.06);
+  box-shadow: 0 18px 40px rgba(17, 33, 45, 0.08);
+}
+
+.metric-card-dark {
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at top right, rgba(217, 125, 84, 0.2), transparent 32%),
+    linear-gradient(160deg, #11212d 0%, #1b313f 100%);
+  color: white;
+  box-shadow: 0 20px 44px rgba(17, 33, 45, 0.18);
+}
+
+.admin-link-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9)),
+    #fff;
+  border: 1px solid rgba(17, 33, 45, 0.06);
+  box-shadow: 0 20px 48px rgba(17, 33, 45, 0.08);
+}
+
+.admin-link-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, #d97d54, #244855);
+}
+
+.section-tag {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffd8c7;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.8rem;
+}
+
+.data-table thead th {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(17, 33, 45, 0.48);
+  padding-bottom: 0.4rem;
+}
+
+.data-table tbody tr {
+  background: #fff;
+  box-shadow: 0 14px 32px rgba(17, 33, 45, 0.06);
+}
+
+.data-table tbody td {
+  padding: 1rem 1rem;
+}
+
+.data-table tbody tr td:first-child {
+  border-radius: 1rem 0 0 1rem;
+}
+
+.data-table tbody tr td:last-child {
+  border-radius: 0 1rem 1rem 0;
+}
