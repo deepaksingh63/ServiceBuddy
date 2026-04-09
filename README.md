@@ -1,6 +1,6 @@
-# Service Marketplace
+# ServiceBuddy
 
-Full-stack service marketplace inspired by Urban Company. Users can book trusted local services, providers can manage listings and bookings, and admins can approve providers and track marketplace analytics.
+ServiceBuddy is a full-stack local services marketplace inspired by Urban Company. Users can book trusted local services, providers can manage listings and bookings, and admins can approve providers and track marketplace analytics.
 
 ## Stack
 
@@ -53,4 +53,3 @@ npm run dev
 - Admin: `admin@servicemarketplace.com` / `Admin@123`
 - Provider: `provider@servicemarketplace.com` / `Provider@123`
 - User: `user@servicemarketplace.com` / `User@123`
-
