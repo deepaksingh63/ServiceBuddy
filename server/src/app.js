@@ -22,11 +22,15 @@ const __dirname = path.dirname(__filename);
 app.use(
   cors({
     origin: (origin, callback) => {
+      const configuredOrigins = String(process.env.CLIENT_URL || "")
+        .split(",")
+        .map((entry) => entry.trim())
+        .filter(Boolean);
       const isLocalhostOrigin =
         typeof origin === "string" &&
         /^http:\/\/localhost:\d+$/.test(origin);
 
-      if (!origin || isLocalhostOrigin || origin === process.env.CLIENT_URL) {
+      if (!origin || isLocalhostOrigin || configuredOrigins.includes(origin)) {
         callback(null, true);
         return;
       }

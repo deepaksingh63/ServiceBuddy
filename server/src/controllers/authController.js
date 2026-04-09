@@ -3,16 +3,20 @@ import User from "../models/User.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import { generateToken } from "../utils/generateToken.js";
 
-const cookieOptions = {
-  httpOnly: true,
-  sameSite: "lax",
-  secure: false,
-  maxAge: 7 * 24 * 60 * 60 * 1000,
+const getCookieOptions = () => {
+  const isProduction = process.env.NODE_ENV === "production";
+
+  return {
+    httpOnly: true,
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  };
 };
 
 const sendAuthResponse = (res, user, statusCode = 200) => {
   const token = generateToken(user._id);
-  res.cookie(process.env.COOKIE_NAME || "service_marketplace_token", token, cookieOptions);
+  res.cookie(process.env.COOKIE_NAME || "service_marketplace_token", token, getCookieOptions());
   res.status(statusCode).json({
     message: "Authentication successful",
     user: {
@@ -85,7 +89,7 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.clearCookie(process.env.COOKIE_NAME || "service_marketplace_token");
+  res.clearCookie(process.env.COOKIE_NAME || "service_marketplace_token", getCookieOptions());
   res.json({ message: "Logged out successfully" });
 };
 
