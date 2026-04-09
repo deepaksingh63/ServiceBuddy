@@ -47,9 +47,3 @@ npm run seed
 ```bash
 npm run dev
 ```
-
-## Demo credentials after seed
-
-- Admin: `admin@servicemarketplace.com` / `Admin@123`
-- Provider: `provider@servicemarketplace.com` / `Provider@123`
-- User: `user@servicemarketplace.com` / `User@123`
