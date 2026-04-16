@@ -1,5 +1,4 @@
 import Service from "../models/Service.js";
-import User from "../models/User.js";
 
 const categoryFallbackBySkill = {
   Wiring: "Electrician",
@@ -71,42 +70,8 @@ const createServicePayloads = (provider) => {
   }));
 };
 
-const ensureApprovedProviderServices = async () => {
-  const approvedProviders = await User.find({
-    role: "provider",
-    "providerProfile.isApproved": true,
-  }).select("name providerProfile");
-
-  for (const provider of approvedProviders) {
-    const payloads = createServicePayloads(provider);
-
-    for (const payload of payloads) {
-      const existingService = await Service.findOne({
-        providerId: provider._id,
-        category: payload.category,
-        title: payload.title,
-      });
-
-      if (!existingService) {
-        await Service.create(payload);
-      } else {
-        existingService.price = payload.price;
-        existingService.description = payload.description;
-        existingService.country = payload.country;
-        existingService.state = payload.state;
-        existingService.district = payload.district;
-        existingService.city = payload.city;
-        existingService.area = payload.area;
-        existingService.isActive = true;
-        await existingService.save();
-      }
-    }
-  }
-};
-
 export const getServices = async (req, res) => {
   const { category, city, state, area, search } = req.query;
-  await ensureApprovedProviderServices();
   const query = { isActive: true };
 
   if (category) {
