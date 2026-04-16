@@ -114,32 +114,41 @@ export const forgotPassword = async (req, res) => {
       ? req.headers.origin
       : process.env.CLIENT_URL || "http://localhost:5173";
   const resetUrl = `${clientOrigin}/reset-password/${resetToken}`;
-  const emailSent = await sendEmail({
-    to: user.email,
-    subject: "Reset your ServiceBuddy password",
-    text: `Reset your password using this link: ${resetUrl}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #11212d;">
-        <h2>Reset your password</h2>
-        <p>We received a request to reset your ServiceBuddy password.</p>
-        <p>
-          <a href="${resetUrl}" style="display:inline-block;padding:12px 20px;background:#11212d;color:#ffffff;text-decoration:none;border-radius:999px;">
-            Reset Password
-          </a>
-        </p>
-        <p>If the button does not work, use this link:</p>
-        <p><a href="${resetUrl}">${resetUrl}</a></p>
-        <p>This link will expire in 15 minutes.</p>
-      </div>
-    `,
-  });
+  let emailSent = false;
+  let emailError = "";
+
+  try {
+    emailSent = await sendEmail({
+      to: user.email,
+      subject: "Reset your ServiceBuddy password",
+      text: `Reset your password using this link: ${resetUrl}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #11212d;">
+          <h2>Reset your password</h2>
+          <p>We received a request to reset your ServiceBuddy password.</p>
+          <p>
+            <a href="${resetUrl}" style="display:inline-block;padding:12px 20px;background:#11212d;color:#ffffff;text-decoration:none;border-radius:999px;">
+              Reset Password
+            </a>
+          </p>
+          <p>If the button does not work, use this link:</p>
+          <p><a href="${resetUrl}">${resetUrl}</a></p>
+          <p>This link will expire in 15 minutes.</p>
+        </div>
+      `,
+    });
+  } catch (error) {
+    emailError = error.message || "Email delivery failed";
+    console.error("Forgot password email failed:", emailError);
+  }
 
   res.json({
     message: emailSent
       ? "Password reset link sent to your email"
-      : "Password reset link generated. SMTP not configured, so use the link below.",
+      : "Password reset link generated. Email delivery is unavailable right now, so use the link below.",
     resetUrl,
     emailSent,
+    emailError,
   });
 };
 
