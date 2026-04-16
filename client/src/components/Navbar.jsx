@@ -44,7 +44,7 @@ const Navbar = () => {
   const closeMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/40 bg-[linear-gradient(180deg,rgba(255,249,243,0.88),rgba(247,239,230,0.78))] backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b border-white/40 bg-sand/85 backdrop-blur-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-3 text-lg font-semibold text-ink">
           <span className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-[1.4rem] bg-ink shadow-soft">

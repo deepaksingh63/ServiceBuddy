@@ -4,7 +4,7 @@
 
 :root {
   color: #11212d;
-  background: #f6efe6;
+  background: #f7efe5;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -12,12 +12,9 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top left, rgba(230, 128, 79, 0.2), transparent 24%),
-    radial-gradient(circle at 85% 12%, rgba(74, 148, 129, 0.14), transparent 22%),
-    radial-gradient(circle at 80% 70%, rgba(36, 72, 85, 0.1), transparent 24%),
-    linear-gradient(180deg, #fff8f1 0%, #f6efe6 48%, #f2eadf 100%);
-  color: #11212d;
-  background-attachment: fixed;
+    radial-gradient(circle at top left, rgba(217, 125, 84, 0.14), transparent 25%),
+    radial-gradient(circle at right center, rgba(36, 72, 85, 0.08), transparent 22%),
+    linear-gradient(180deg, #fbf5ee 0%, #f7efe5 100%);
 }
 
 * {
@@ -77,11 +74,10 @@ body {
   overflow: hidden;
   border-radius: 2rem;
   background:
-    radial-gradient(circle at top right, rgba(242, 150, 107, 0.24), transparent 28%),
-    radial-gradient(circle at left bottom, rgba(73, 149, 129, 0.16), transparent 25%),
-    linear-gradient(135deg, #13232f 0%, #1f3b49 56%, #2b5a63 100%);
+    radial-gradient(circle at top right, rgba(217, 125, 84, 0.22), transparent 30%),
+    linear-gradient(135deg, #11212d 0%, #1f3544 56%, #244855 100%);
   color: #fff;
-  box-shadow: 0 28px 70px rgba(17, 33, 45, 0.16);
+  box-shadow: 0 28px 70px rgba(17, 33, 45, 0.18);
 }
 
 .hero-panel::after {
@@ -97,18 +93,16 @@ body {
 
 .surface-panel {
   border-radius: 1.75rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.88)),
-    #fff;
-  border: 1px solid rgba(17, 33, 45, 0.05);
-  box-shadow: 0 18px 45px rgba(17, 33, 45, 0.07);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 33, 45, 0.06);
+  box-shadow: 0 18px 45px rgba(17, 33, 45, 0.08);
 }
 
 .surface-muted {
   border-radius: 1.5rem;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.58)),
-    #f6eee3;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.56)),
+    #f7efe5;
   border: 1px solid rgba(17, 33, 45, 0.06);
 }
 
@@ -124,9 +118,8 @@ body {
 .metric-card-dark {
   border-radius: 1.5rem;
   background:
-    radial-gradient(circle at top right, rgba(242, 150, 107, 0.22), transparent 32%),
-    radial-gradient(circle at left bottom, rgba(73, 149, 129, 0.12), transparent 26%),
-    linear-gradient(160deg, #13232f 0%, #1d3642 100%);
+    radial-gradient(circle at top right, rgba(217, 125, 84, 0.2), transparent 32%),
+    linear-gradient(160deg, #11212d 0%, #1b313f 100%);
   color: white;
   box-shadow: 0 20px 44px rgba(17, 33, 45, 0.18);
 }
@@ -147,7 +140,7 @@ body {
   position: absolute;
   inset: 0 0 auto 0;
   height: 4px;
-  background: linear-gradient(90deg, #df845c, #3a8b7c, #244855);
+  background: linear-gradient(90deg, #d97d54, #244855);
 }
 
 .section-tag {
