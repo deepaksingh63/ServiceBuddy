@@ -11,7 +11,7 @@ const AppLayout = ({ children }) => {
   );
 
   return (
-    <div className="min-h-screen bg-sand">
+    <div className="min-h-screen bg-transparent">
       <Navbar />
       <main>{children}</main>
       {shouldShowAssistant && <CustomerAssistant />}
