@@ -19,6 +19,7 @@ const categoryThemes = {
 const ServicesPage = () => {
   const { user } = useAuth();
   const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [providerFilters, setProviderFilters] = useState({
     country: "India",
@@ -31,8 +32,12 @@ const ServicesPage = () => {
 
   useEffect(() => {
     const fetchServices = async () => {
-      const { data } = await api.get("/services");
-      setServices(data);
+      try {
+        const { data } = await api.get("/services");
+        setServices(data);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchServices();
@@ -129,27 +134,42 @@ const ServicesPage = () => {
               title="Choose the service you need"
               description="Start by choosing a category. Then you will see provider profile cards for that service."
             />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-              {categoryCards.map((card) => (
-                <button
-                  key={card.category}
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategory(card.category);
-                    setProviderFilters({ country: "India", area: "", city: "", district: "", state: "" });
-                  }}
-                  className={`rounded-[2rem] bg-gradient-to-br ${categoryThemes[card.category] || "from-white to-sand"} p-8 text-left shadow-soft transition hover:-translate-y-1`}
-                >
-                  <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">
-                    {card.category}
-                  </p>
-                  <h3 className="mt-6 text-3xl font-semibold text-ink">{card.category}</h3>
-                  <p className="mt-4 text-sm text-ink/65">
-                    {card.providersCount} provider{card.providersCount !== 1 ? "s" : ""} available
-                  </p>
-                </button>
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="rounded-[2rem] bg-white p-8 shadow-soft"
+                  >
+                    <div className="h-4 w-24 animate-pulse rounded-full bg-sand" />
+                    <div className="mt-6 h-10 w-40 animate-pulse rounded-full bg-sand/80" />
+                    <div className="mt-4 h-4 w-32 animate-pulse rounded-full bg-sand/70" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+                {categoryCards.map((card) => (
+                  <button
+                    key={card.category}
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory(card.category);
+                      setProviderFilters({ country: "India", area: "", city: "", district: "", state: "" });
+                    }}
+                    className={`rounded-[2rem] bg-gradient-to-br ${categoryThemes[card.category] || "from-white to-sand"} p-8 text-left shadow-soft transition hover:-translate-y-1`}
+                  >
+                    <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">
+                      {card.category}
+                    </p>
+                    <h3 className="mt-6 text-3xl font-semibold text-ink">{card.category}</h3>
+                    <p className="mt-4 text-sm text-ink/65">
+                      {card.providersCount} provider{card.providersCount !== 1 ? "s" : ""} available
+                    </p>
+                  </button>
+                ))}
+              </div>
+            )}
           </>
         ) : (
           <>
@@ -236,7 +256,25 @@ const ServicesPage = () => {
             </div>
 
             <div className="mt-10 space-y-5">
-              {filteredProfiles.length === 0 && (
+              {isLoading &&
+                Array.from({ length: 3 }).map((_, index) => (
+                  <div key={index} className="rounded-[1.75rem] bg-white p-5 shadow-soft">
+                    <div className="flex items-start gap-4">
+                      <div className="h-20 w-20 animate-pulse rounded-[1.5rem] bg-sand" />
+                      <div className="flex-1">
+                        <div className="h-4 w-24 animate-pulse rounded-full bg-sand" />
+                        <div className="mt-3 h-8 w-56 animate-pulse rounded-full bg-sand/80" />
+                        <div className="mt-3 h-4 w-40 animate-pulse rounded-full bg-sand/70" />
+                        <div className="mt-2 h-4 w-48 animate-pulse rounded-full bg-sand/70" />
+                      </div>
+                    </div>
+                    <div className="mt-5 flex gap-3">
+                      <div className="h-12 w-28 animate-pulse rounded-full bg-sand" />
+                      <div className="h-12 w-36 animate-pulse rounded-full bg-sand/80" />
+                    </div>
+                  </div>
+                ))}
+              {!isLoading && filteredProfiles.length === 0 && (
                 <div className="rounded-[1.75rem] bg-white p-6 text-sm text-ink/70 shadow-soft">
                   No provider found for this selected location. Try another state, district, city, or clear the optional area filter.
                 </div>

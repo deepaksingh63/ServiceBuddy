@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
 import AppLayout from "./layouts/AppLayout";
+import { api } from "./api/client";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminMarketplaceActivityPage from "./pages/admin/AdminMarketplaceActivityPage";
 import AdminNotificationsPage from "./pages/admin/AdminNotificationsPage";
@@ -22,6 +24,18 @@ import UserDashboardPage from "./pages/user/UserDashboardPage";
 
 const App = () => {
   const { user } = useAuth();
+
+  useEffect(() => {
+    const warmupBackend = async () => {
+      try {
+        await api.get("/health");
+      } catch (error) {
+        console.debug("Backend warm-up skipped", error?.message || error);
+      }
+    };
+
+    warmupBackend();
+  }, []);
 
   return (
     <Routes>
