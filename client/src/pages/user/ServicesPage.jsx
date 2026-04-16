@@ -1,6 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  ChefHat,
+  Hammer,
+  Paintbrush2,
+  PlugZap,
+  ShowerHead,
+  Wrench,
+} from "lucide-react";
 import AppLayout from "../../layouts/AppLayout";
 import SectionTitle from "../../components/SectionTitle";
 import { api } from "../../api/client";
@@ -14,6 +22,46 @@ const categoryThemes = {
   Labour: "from-[#f5e6d9] to-white",
   Mason: "from-[#efe3d2] to-white",
   Cook: "from-[#fff2d8] to-white",
+};
+
+const categoryIcons = {
+  Electrician: {
+    icon: PlugZap,
+    shell: "bg-[#fff2e8]",
+    ink: "text-[#e27a47]",
+  },
+  Plumber: {
+    icon: Wrench,
+    shell: "bg-[#eaf6ff]",
+    ink: "text-[#4090c8]",
+  },
+  Cleaner: {
+    icon: Paintbrush2,
+    shell: "bg-[#e9f8ef]",
+    ink: "text-[#3c9c69]",
+  },
+  Labour: {
+    icon: Hammer,
+    shell: "bg-[#f6eadf]",
+    ink: "text-[#b47745]",
+  },
+  Mason: {
+    icon: Hammer,
+    shell: "bg-[#f0e6d7]",
+    ink: "text-[#9f7550]",
+  },
+  Cook: {
+    icon: ChefHat,
+    shell: "bg-[#fff4df]",
+    ink: "text-[#d28b29]",
+  },
+};
+
+const CategoryIcon = ({ category, className = "h-7 w-7" }) => {
+  const iconConfig = categoryIcons[category] || categoryIcons.Cleaner;
+  const Icon = iconConfig.icon;
+
+  return <Icon className={`${className} ${iconConfig.ink}`} strokeWidth={2.2} />;
 };
 
 const ServicesPage = () => {
@@ -159,10 +207,15 @@ const ServicesPage = () => {
                     }}
                     className={`rounded-[2rem] bg-gradient-to-br ${categoryThemes[card.category] || "from-white to-sand"} p-8 text-left shadow-soft transition hover:-translate-y-1`}
                   >
+                    <div
+                      className={`flex h-16 w-16 items-center justify-center rounded-[1.5rem] ${categoryIcons[card.category]?.shell || "bg-sand"}`}
+                    >
+                      <CategoryIcon category={card.category} className="h-8 w-8" />
+                    </div>
                     <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">
                       {card.category}
                     </p>
-                    <h3 className="mt-6 text-3xl font-semibold text-ink">{card.category}</h3>
+                    <h3 className="mt-4 text-3xl font-semibold text-ink">{card.category}</h3>
                     <p className="mt-4 text-sm text-ink/65">
                       {card.providersCount} provider{card.providersCount !== 1 ? "s" : ""} available
                     </p>
@@ -282,8 +335,10 @@ const ServicesPage = () => {
               {filteredProfiles.map((service) => (
                 <div key={service._id} className="rounded-[1.75rem] bg-white p-5 shadow-soft">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-sand text-2xl font-semibold text-brand">
-                      {service.providerId?.name?.slice(0, 1) || "P"}
+                    <div
+                      className={`flex h-20 w-20 items-center justify-center rounded-[1.5rem] ${categoryIcons[selectedCategory]?.shell || "bg-sand"}`}
+                    >
+                      <CategoryIcon category={selectedCategory} className="h-10 w-10" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">

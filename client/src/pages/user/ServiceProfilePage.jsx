@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Star } from "lucide-react";
+import {
+  ArrowLeft,
+  ChefHat,
+  Hammer,
+  Paintbrush2,
+  PlugZap,
+  Star,
+  Wrench,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import AppLayout from "../../layouts/AppLayout";
 import { api, getErrorMessage } from "../../api/client";
@@ -16,6 +24,39 @@ const getAssetUrl = (fileUrl) => {
   }
 
   return `${api.defaults.baseURL.replace(/\/api$/, "")}${fileUrl}`;
+};
+
+const categoryIcons = {
+  Electrician: {
+    icon: PlugZap,
+    shell: "bg-[#fff2e8]",
+    ink: "text-[#e27a47]",
+  },
+  Plumber: {
+    icon: Wrench,
+    shell: "bg-[#eaf6ff]",
+    ink: "text-[#4090c8]",
+  },
+  Cleaner: {
+    icon: Paintbrush2,
+    shell: "bg-[#e9f8ef]",
+    ink: "text-[#3c9c69]",
+  },
+  Labour: {
+    icon: Hammer,
+    shell: "bg-[#f6eadf]",
+    ink: "text-[#b47745]",
+  },
+  Mason: {
+    icon: Hammer,
+    shell: "bg-[#f0e6d7]",
+    ink: "text-[#9f7550]",
+  },
+  Cook: {
+    icon: ChefHat,
+    shell: "bg-[#fff4df]",
+    ink: "text-[#d28b29]",
+  },
 };
 
 const ServiceProfilePage = () => {
@@ -46,6 +87,9 @@ const ServiceProfilePage = () => {
     );
   }
 
+  const iconConfig = categoryIcons[service.category] || categoryIcons.Cleaner;
+  const CategoryIcon = iconConfig.icon;
+
   return (
     <AppLayout>
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
@@ -67,8 +111,10 @@ const ServiceProfilePage = () => {
                 className="h-28 w-28 rounded-[2rem] object-cover"
               />
             ) : (
-              <div className="flex h-28 w-28 items-center justify-center rounded-[2rem] bg-sand text-4xl font-semibold text-brand">
-                {service.providerId?.name?.slice(0, 1) || "P"}
+              <div
+                className={`flex h-28 w-28 items-center justify-center rounded-[2rem] ${iconConfig.shell}`}
+              >
+                <CategoryIcon className={`h-12 w-12 ${iconConfig.ink}`} strokeWidth={2.2} />
               </div>
             )}
 
